@@ -1,0 +1,512 @@
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+browser()
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt)
+df
+}
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+View(df)
+head(df, 5)
+head(df, 5)$dt
+head(df,5)$dt
+conso_to_df <- function(filepath){
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+dates <- df[,1]
+to_rem <- startsWith(as.character(df[,1]), "H") | startsWith(as.character(df[,1]), "J") | startsWith(as.character(df[,1]), "R")
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt)
+df
+}
+conso_to_df <- function(filepath){
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+dates <- df[,1]
+to_rem <- startsWith(as.character(df[,1]), "H") | startsWith(as.character(df[,1]), "J") | startsWith(as.character(df[,1]), "R")
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt)
+df
+}
+conso_to_df <- function(filepath){
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+dates <- df[,1]
+to_rem <- startsWith(as.character(df[,1]), "H") | startsWith(as.character(df[,1]), "J") | startsWith(as.character(df[,1]), "R")
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt) %>% as.data.frame()
+df
+}
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+conso_df$conso_j <- as.numeric(conso_df$conso_j)
+conso_df$conso_jm1 <- as.numeric(conso_df$conso_jm1)
+head(conso_df, 5)
+pre_df2 = as.data.frame(pre_df)
+conso_df2 = as.data.frame(conso_df)
+prod_df2 = as.data.frame(prod_df)
+full_df <- pre_df2 %>%
+dplyr::left_join(spot_df3) %>%
+dplyr::left_join(conso_df2) %>%
+dplyr::left_join(prod_df2)
+full_df
+pre_df$dt
+full_df$dt
+full_df$dt <- attr(full_df$dt , "tzone") <- "Europe/Paris"
+attr(full_df$dt , "tzone") <- "Europe/Paris"
+head(full_df , 5)
+full_df <- pre_df2 %>%
+dplyr::left_join(spot_df3) %>%
+dplyr::left_join(conso_df2) %>%
+dplyr::left_join(prod_df2)
+attr(full_df$dt , "tzone") <- "Europe/Paris"
+head(full_df , 5)
+knitr::opts_chunk$set(echo = TRUE)
+source("main.R")
+2
+View(spot_df3)
+View(full_df)
+min(full_df$dt)
+max(full_df$dt)
+max(spot_df3)
+max(spot_df3$dt)
+df_extract_datetime <- function(df , start_date , end_date){
+df2 <- as.data.frame(with(full_df, full_df[(full_df$dt >= start_date & full_df$dt <= end_date),]))
+df2
+}
+#merging dataframe on datetime (2016 to 2017)
+spot_df2 = to_half_hour(spot_df)
+spot_df4 = df_extract_datetime(spot_df2 , "2016-01-01" , "2017-12-31")
+head(spot_df4 , 5)
+spot_df3 = df_extract_datetime(spot_df2 , "2016-01-01" , "2017-12-31")
+head(spot_df3 , 5)
+#merging dataframe on datetime (2016 to 2017)
+spot_df2 = to_half_hour(spot_df)
+spot_df3 = df_extract_datetime(spot_df2 , "2016-01-01" , "2017-12-31")
+head(spot_df3 , 5)
+spot_df
+spot_df2
+spot_df3 = df_extract_datetime(spot_df2 , "2016-01-01" , "2017-12-31")
+head(spot_df3 , 5)
+spot_df3 = c()
+head(spot_df3 , 5)
+spot_df3 = df_extract_datetime(spot_df2 , "2016-01-01" , "2017-12-31")
+head(spot_df3 , 5)
+df2 <- as.data.frame(with(df, df[(df$dt >= start_date & df$dt <= end_date),]))
+df_extract_datetime <- function(df , start_date , end_date){
+df2 <- as.data.frame(with(df, df[(df$dt >= start_date & df$dt <= end_date),]))
+df2
+}
+#merging dataframe on datetime (2016 to 2017)
+spot_df2 = to_half_hour(spot_df)
+spot_df3 = c()
+spot_df3 = df_extract_datetime(spot_df2 , "2016-01-01" , "2017-12-31")
+head(spot_df3 , 5)
+head(spot_df3 , 5)
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+max(pre_df3$dt)
+max(prod_df3$dt)
+max(conso_df3$dt)
+max(prod_df2$dt)
+#dataframe transforamtion
+pre_df2 = as.data.frame(pre_df)
+conso_df2 = as.data.frame(conso_df)
+prod_df2 = as.data.frame(prod_df)
+max(prod_df2$dt)
+prod_df2$dt
+conso_df2$dt
+conso_df$dt
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+conso_df$conso_j <- as.numeric(conso_df$conso_j)
+conso_df$conso_jm1 <- as.numeric(conso_df$conso_jm1)
+prod_filepath_lst <- list.files(path="data/prod", pattern="*.xls", full.names=T, recursive=FALSE)
+prod_df <- lapply(prod_filepath_lst, prod_to_df) %>%
+bind_rows()
+margin_filepath_lst <- list.files(path="data/marges", pattern="*.xls", full.names=T, recursive=FALSE)
+margin_df <- lapply(margin_filepath_lst, margin_to_df) %>%
+bind_rows()
+source('~/Estimation PRE/main.R')
+View(conso_df)
+length(conso_df)
+length(conso_df$dt)
+full_df
+conso_to_df <- function(filepath){
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+dates <- df[,1]
+to_rem <- startsWith(as.character(df[,1]), "H") | startsWith(as.character(df[,1]), "J") | startsWith(as.character(df[,1]), "R")
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt) %>% as.data.frame()
+df
+}
+View(conso_df)
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+conso_df$conso_j <- as.numeric(conso_df$conso_j)
+conso_df$conso_jm1 <- as.numeric(conso_df$conso_jm1)
+prod_filepath_lst <- list.files(path="data/prod", pattern="*.xls", full.names=T, recursive=FALSE)
+prod_df <- lapply(prod_filepath_lst, prod_to_df) %>%
+bind_rows()
+source('~/Estimation PRE/main.R')
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+conso_df$conso_j <- as.numeric(conso_df$conso_j)
+conso_df$conso_jm1 <- as.numeric(conso_df$conso_jm1)
+warnings()
+fulldf = full_df
+fulldf$dt
+fulldf
+head(fulldf,5)
+#dataframe transforamtion
+pre_df2 = as.data.frame(pre_df)
+conso_df2 = as.data.frame(conso_df)
+prod_df2 = as.data.frame(prod_df)
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+full_df <- pre_df2 %>%
+dplyr::left_join(spot_df3) %>%
+dplyr::left_join(conso_df2) %>%
+dplyr::left_join(prod_df2)
+head(full_df , 5)
+filepath <- "data/conso/conso_mix_RTE_2016.xls"
+conso_to_df <- function(filepath){
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+dates <- df[,1]
+to_rem <- startsWith(as.character(df[,1]), "H") | startsWith(as.character(df[,1]), "J") | startsWith(as.character(df[,1]), "R")
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt) %>% as.data.frame()
+df
+}
+view(conso_df)
+Viewonso_df)
+View(conso_df)
+conso_df1 = conso_to_df(filepath)
+filepath <- "data/conso/conso_mix_RTE_2016.xls"
+filepath
+conso_df1 = conso_to_df(filepath)
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+source('~/Estimation PRE/functions.R', encoding = 'UTF-8')
+View(conso_df)
+source('~/Estimation PRE/main.R')
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+prod_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+View(conso_df)
+filepath <- "data/conso/conso_mix_RTE_2016.xls"
+conso_to_df <- function(filepath){
+df <- read.table(filepath,
+header=FALSE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+dates <- df[,1]
+to_rem <- startsWith(as.character(df[,1]), "H") | startsWith(as.character(df[,1]), "J") | startsWith(as.character(df[,1]), "R")
+dates[!startsWith(as.character(dates), "Journée du ")] <- ""
+dates <- gsub("Journée du ", "", dates)
+dates <- na.locf(dates)
+df[,1] <- paste(dates, df[,1])
+df <- df[, c(1,2,3)]
+colnames(df) <- c("dt", "conso_jm1", "conso_j")
+df <- na.omit(df)
+df <- df[!to_rem,]
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt) %>% as.data.frame()
+df
+}
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+prod_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=FALSE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+conso_filepath_lst <- list.files(path="data/conso", pattern="*.xls", full.names=T, recursive=TRUE)
+conso_df <- lapply(conso_filepath_lst, conso_to_df) %>%
+bind_rows()
+View(conso_df)
+#dataframe transforamtion
+pre_df2 = as.data.frame(pre_df)
+conso_df2 = as.data.frame(conso_df)
+prod_df2 = as.data.frame(prod_df)
+View(conso_df2)
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+max(conso_df3$dt)
+head(conso_df3$dt , 5)
+tail(conso_df3$dt , 5)
+tail(conso_df2$dt , 5)
+attr(conso_df2$dt , "tzone") <- "Europe/Paris"
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+tail(conso_df3 , 5)
+tail(conso_df2 , 5)
+tail(spot_df3$dt , 5)
+tail(pre_df2$dt , 5)
+tail(prod_df2$dt , 5)
+tail(conso_df2$dt , 5)
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+tail(pre_df3$dt , 5)
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+tail(prod_df3$dt , 5)
+attr(conso_df2$dt , "tzone") <- "Europe/Paris"
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+tail(conso_df3$dt , 5)
+View(pre_df)
+head(conso_df2$dt , 5)
+head(pre_df2$dt , 5)
+attr(prod_df2$dt , "tzone") <- "Europe/Paris"
+head(prod_df2$dt , 5)
+attr(pre_df2$dt , "tzone") <- "Europe/Paris"
+head(pre_df2$dt , 5)
+filepath <- "data/pre/MMA_HECAR_2016.xls"
+pre_to_df <- function(filepath){
+df <- read.table(filepath,
+header=TRUE,
+skip=5,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+df <- df[, c(1,4,5,6)]
+colnames(df) <- c("dt", "tendancy", "prep", "pren")
+df <- na.omit(df)
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt)
+df
+}
+pre_filepath_lst <- list.files(path="data/pre", pattern="*.xls", full.names=T, recursive=FALSE)
+pre_df <- lapply(pre_filepath_lst, pre_to_df) %>%
+bind_rows()
+View(pre_df)
+pre_filepath_lst <- list.files(path="data/pre", pattern="*.xls", full.names=T, recursive=FALSE)
+pre_df <- lapply(pre_filepath_lst, pre_to_df) %>%
+bind_rows()
+filepath <- "data/pre/MMA_HECAR_2016.xls"
+pre_to_df <- function(filepath){
+df <- read.table(filepath,
+header=TRUE,
+skip=5,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+df <- df[, c(1,4,5,6)]
+colnames(df) <- c("dt", "tendancy", "prep", "pren")
+df <- na.omit(df)
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt)
+df
+}
+source('~/Estimation PRE/functions.R', encoding = 'UTF-8')
+pre_filepath_lst <- list.files(path="data/pre", pattern="*.xls", full.names=T, recursive=FALSE)
+pre_df <- lapply(pre_filepath_lst, pre_to_df) %>%
+bind_rows()
+pre_df2 = as.data.frame(pre_df)
+conso_df2 = as.data.frame(conso_df)
+prod_df2 = as.data.frame(prod_df)
+attr(pre_df2$dt , "tzone") <- "Europe/Paris"
+attr(conso_df2$dt , "tzone") <- "Europe/Paris"
+attr(prod_df2$dt , "tzone") <- "Europe/Paris"
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+head(pre_df3$dt , 5)
+head(spot_df3$dt , 5)
+head(conso_df3$dt , 5)
+head(prod_df3$dt , 5)
+View(prod_df)
+View(prod_df)
+View(conso_df)
+View(prod_df)
+filepath <- "data/prod/PrevisionProduction_2016.xls"
+prod_to_df <- function(filepath){
+df <- read.table(filepath,
+header=TRUE,
+skip=0,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+colnames(df) <- c("dt", "hour", "prod_prog", "prod_int")
+df <- na.omit(df)
+df$dt <- paste(df$dt, df$hour)
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% dplyr::select(-hour) %>% as_tbl_time(index=dt)
+df
+}
+prod_filepath_lst <- list.files(path="data/prod", pattern="*.xls", full.names=T, recursive=FALSE)
+prod_df <- lapply(prod_filepath_lst, prod_to_df) %>%
+bind_rows()
+head(prod_df , 5)
+prod_df2 = as.data.frame(prod_df)
+head(prod_df2 , 5)
+attr(pre_df2$dt , "tzone") <- "Europe/Paris"
+attr(conso_df2$dt , "tzone") <- "Europe/Paris"
+attr(prod_df2$dt , "tzone") <- "Europe/Paris"
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+head(pre_df2 , 5)
+View(pre_df)
+pre_filepath_lst <- list.files(path="data/pre", pattern="*.xls", full.names=T, recursive=FALSE)
+pre_df <- lapply(pre_filepath_lst, pre_to_df) %>%
+bind_rows()
+filepath <- "data/pre/MMA_HECAR_2016.xls"
+pre_to_df <- function(filepath){
+df <- read.table(filepath,
+header=TRUE,
+skip=5,
+sep="\t",
+fileEncoding="CP1252",
+fill = TRUE,
+row.names = NULL)
+df <- df[, c(1,4,5,6)]
+colnames(df) <- c("dt", "tendancy", "prep", "pren")
+df <- na.omit(df)
+df$dt <- as.POSIXct(df$dt, format="%d/%m/%Y %H:%M", tz="Europe/Paris")
+df <- df %>% as_tbl_time(index=dt)
+df
+}
+pre_filepath_lst <- list.files(path="data/pre", pattern="*.xls", full.names=T, recursive=FALSE)
+pre_df <- lapply(pre_filepath_lst, pre_to_df) %>%
+bind_rows()
+View(pre_df)
+View(pre_df)
+pre_df2 = as.data.frame(pre_df)
+conso_df2 = as.data.frame(conso_df)
+prod_df2 = as.data.frame(prod_df)
+head(pre_df2 , 5)
+head(conso_df2 , 5)
+head(prod_df2 , 5)
+head(conso_df2 , 5)
+head(conso_df2$dt , 5)
+head(prod_df2$dt , 5)
+head(pre_df2$dt , 5)
+#regularisation size (term of datetime)
+pre_df3 = df_extract_datetime(pre_df2 , "2016-01-01" , "2017-12-31")
+prod_df3 = df_extract_datetime(prod_df2 , "2016-01-01" , "2017-12-31")
+conso_df3 = df_extract_datetime(conso_df2 , "2016-01-01" , "2017-12-31")
+head(pre_df3$dt , 5)
+head(conso_df3$dt , 5)
+head(prod_df3$dt , 5)
+full_df <- pre_df3 %>%
+dplyr::left_join(spot_df3) %>%
+dplyr::left_join(conso_df3) %>%
+dplyr::left_join(prod_df3)
+attr(full_df$dt , "tzone") <- "Europe/Paris"
+head(full_df$dt , 5)
+min(full_df$dt)
+max(full_df$dt)
+tail(full_df , 5)
+View(prod_df2)
+full_df[complete.cases(full_df), ]
+tail(full_df , 5)
+full_df2 = full_df[complete.cases(full_df), ]
+tail(full_df2 , 5)
+#splitting dataframe
+#training dataframe
+full_df_training = as.data.frame(with(full_df, full_df[(full_df$dt >= "2016-01-01" & full_df$dt <= "2017-12-31"),]))
+full_df_training = df_extract_datetime(full_df2 , "2016-01-01" , "2017-06-3O")
+#testing dataframe
+full_df_testing = df_extract_datetime( full_df2 , "2017-07-01" , "2017-09-3O")
+#validation dataframe
+full_df_validation = df_extract_datetime(full_df2 , "2017-10-01" , "2017-12-3O")
+head(full_df_training , 5)
+head(full_df_testing , 5)
+head(full_df_validation , 5)
+head(full_df2 , 5)

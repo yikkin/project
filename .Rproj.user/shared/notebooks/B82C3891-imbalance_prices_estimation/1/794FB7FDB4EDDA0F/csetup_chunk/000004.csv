@@ -1,0 +1,27 @@
+"0","knitr::opts_chunk$set(echo = TRUE)"
+"2","Warning messages:
+"
+"2","1: "
+"2","In read.dcf(file.path(p, ""DESCRIPTION""), c(""Package"", ""Version"")) :"
+"2","
+ "
+"2"," cannot open compressed file 'C:/Users/jlyongwe/Documents/R/win-library/3.4/htmltools/DESCRIPTION', probable reason 'No such file or directory'
+"
+"2","2: "
+"2","In read.dcf(file.path(p, ""DESCRIPTION""), c(""Package"", ""Version"")) :"
+"2","
+ "
+"2"," cannot open compressed file 'C:/Users/jlyongwe/Documents/R/win-library/3.4/htmltools/DESCRIPTION', probable reason 'No such file or directory'
+"
+"2","3: "
+"2","In read.dcf(file.path(p, ""DESCRIPTION""), c(""Package"", ""Version"")) :"
+"2","
+ "
+"2"," cannot open compressed file 'C:/Users/jlyongwe/Documents/R/win-library/3.4/htmltools/DESCRIPTION', probable reason 'No such file or directory'
+"
+"2","4: "
+"2","In read.dcf(file.path(p, ""DESCRIPTION""), c(""Package"", ""Version"")) :"
+"2","
+ "
+"2"," cannot open compressed file 'C:/Users/jlyongwe/Documents/R/win-library/3.4/htmltools/DESCRIPTION', probable reason 'No such file or directory'
+"

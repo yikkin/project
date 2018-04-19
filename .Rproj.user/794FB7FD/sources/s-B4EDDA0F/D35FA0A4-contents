@@ -1,0 +1,45 @@
+---
+title: "RTE Imbalance price analysis"
+author: "Valérian Wrobel"
+date: '2018-03-01'
+output:
+  html_document: default
+  pdf_document:
+    latex_engine: xelatex
+mainfont: Calibri Light
+subtitle: for BHC Energy
+abstract: This document presents an analysis of the RTE imbalance prices compared
+  to the EPEX Spot price so as to caliber properly the cost of imbalance for wind
+  and solar power generation for the Earning at Risk valuation on purchase agreements.
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results="hide"}
+  source("main.R")
+```
+
+## Context
+
+The 1st April 2017, the imbalance price calculation methodology has changed (click [here](https://clients.rte-france.com/lang/fr/clients_producteurs/services_clients/dispositif_prix.jsp) for details) and has since remained the same.
+
+Hence in this note we focus on the analysis of available data for the year 2017.
+
+Our aim is to estimate the cost of a positive and of a positive imbalance for wind and solar generation relatively to the spot price level.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height = 12, fig.width = 12, fig.cap="Spot and imbalance prices, sun and wind generation in France, one week of january, june and december"}
+do.call(grid.arrange, do.call(list, unlist(ppp_lst, recursive=FALSE)))
+#do.call(grid.arrange, ppp_lst[[1]])
+#do.call(grid.arrange, ppp_lst[[2]]) 
+#do.call(grid.arrange, ppp_lst[[3]])
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, results="hide"}
+  source("graphical_viz.R")
+htmltools::browsable(htmltools::tagList(dyg_lst[[]]))
+
+```
+

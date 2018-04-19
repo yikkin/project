@@ -1,0 +1,3 @@
+"0","do.call(grid.arrange, do.call(list, unlist(ppp_lst, recursive=FALSE)))"
+"2","Error in unlist(ppp_lst, recursive = FALSE) : object 'ppp_lst' not found
+"

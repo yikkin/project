@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524065636186.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "309133715",
+    "id" : "2AF3190B",
+    "lastKnownWriteTime" : 1524133590,
+    "last_content_update" : 1524133590837,
+    "path" : "~/Estimation PRE/join_dataframe.R",
+    "project_path" : "join_dataframe.R",
+    "properties" : {
+        "cursorPosition" : "39,80",
+        "scrollLine" : "19",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

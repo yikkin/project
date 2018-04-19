@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1524058751784.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6AFA2E0D",
+    "lastKnownWriteTime" : 1524121577,
+    "last_content_update" : 1524121577,
+    "path" : "~/Estimation PRE/main.R",
+    "project_path" : "main.R",
+    "properties" : {
+        "cursorPosition" : "45,0",
+        "scrollLine" : "31"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
